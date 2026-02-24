@@ -1,0 +1,36 @@
+{
+  "name": "jo",
+  "version": "0.1.0",
+  "description": "CLI for managing rigs — parallel AI-assisted development environments",
+  "type": "module",
+  "bin": {
+    "jo": "./bin/run.js"
+  },
+  "main": "dist/index.js",
+  "files": [
+    "bin",
+    "data",
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "dev": "./bin/dev.js",
+    "prepare": "npm run build"
+  },
+  "oclif": {
+    "bin": "jo",
+    "dirname": "jo",
+    "commands": "./dist/commands",
+    "topicSeparator": " "
+  },
+  "dependencies": {
+    "@oclif/core": "^4",
+    "smol-toml": "^1"
+  },
+  "devDependencies": {
+    "@types/node": "^22",
+    "ts-node": "^10",
+    "tsx": "^4.21.0",
+    "typescript": "^5"
+  }
+}
