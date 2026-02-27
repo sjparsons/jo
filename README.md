@@ -14,6 +14,20 @@ npm install -g https://github.com/sjparsons/jo
 
 Requires: Node.js 18+, tmux, claude.
 
+### Dependencies
+
+Jo uses [ticket](https://github.com/wedow/ticket) (`tk`) for task tracking within rigs. Install it along with the [ticket-amend](https://github.com/sjparsons/ticket-amend) plugin, which is needed for updating ticket fields:
+
+```
+npm install -g https://github.com/wedow/ticket
+npm install -g https://github.com/sjparsons/ticket-amend
+```
+
+You may also want these optional plugins:
+
+- [ticket-board](https://github.com/sjparsons/ticket-board) — kanban-style board view for tickets
+- [ticket-wizard](https://github.com/sjparsons/ticket-wizard) — interactive guided ticket creation
+
 
 ### Shell setup
 
