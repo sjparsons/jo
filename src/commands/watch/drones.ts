@@ -17,11 +17,17 @@ export default class WatchDrones extends Command {
     rig: Flags.string({
       description: 'Watch a specific rig by name',
     }),
+    status: Flags.string({
+      char: 's',
+      default: 'open,in_progress',
+      description: 'Comma-separated ticket statuses to show (default: open,in_progress)',
+    }),
   }
 
   async run(): Promise<void> {
     const {flags} = await this.parse(WatchDrones)
     const interval = flags.interval * 1000
+    const allowedStatuses = new Set(flags.status.split(',').map((s) => s.trim()))
 
     // Determine which rigs to watch
     interface RigTarget {
@@ -65,7 +71,11 @@ export default class WatchDrones extends Command {
           if (drones.length === 0) {
             allOutput.push(`\n  ${target.name}: no drones\n`)
           } else {
-            const statuses = drones.map((d) => gatherDroneStatus(d, target.path))
+            const statuses = drones.map((d) => {
+              const s = gatherDroneStatus(d, target.path)
+              s.tickets = s.tickets.filter((t) => allowedStatuses.has(t.status))
+              return s
+            })
             allOutput.push(renderDashboard(target.name, statuses))
           }
         } catch {
